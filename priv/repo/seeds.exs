@@ -2,10 +2,14 @@
 #
 #     mix run priv/repo/seeds.exs
 #
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     FireStarter.Repo.insert!(%FireStarter.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+alias FireStarter.{Repo, Video}
+
+Repo.delete_all(Video)
+
+videos = [
+  %Video{title: "Ruby on Rails", duration: 200},
+  %Video{title: "Phoenix intro", duration: 150},
+  %Video{title: "NodeJS Advanced", duration: 432}
+]
+
+Enum.each(videos, &Repo.insert(&1))
