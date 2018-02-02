@@ -1,21 +1,19 @@
 defmodule FireStarterWeb.VideoController do
   use FireStarterWeb, :controller
-  alias FireStarter.{Repo, Video}
+  alias FireStarter.Screencast
 
   def index(conn, _params) do
-    videos = Repo.all(Video)
+    videos = Screencast.list_videos
     render(conn, "index.html", videos: videos)
   end
 
   def new(conn, _params) do
-    changeset = Video.changeset(%Video{}, %{})
+    changeset = Screencast.change_video
     render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"video" => video_params}) do
-    changeset = Video.changeset(%Video{}, video_params)
-
-    case Repo.insert(changeset) do
+    case Screencast.create_video(video_params) do
       {:ok, _} ->
         conn
         |> put_flash(:info, "Video created")
@@ -29,7 +27,7 @@ defmodule FireStarterWeb.VideoController do
   end
 
   def delete(conn, %{"id" => video_id}) do
-    Repo.get(Video, video_id) |> Repo.delete
+    Screencast.delete_video(video_id) 
     conn 
     |> put_flash(:info, "Deleted video #{video_id}")
     |> redirect(to: video_path(conn, :index))
