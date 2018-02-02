@@ -1,6 +1,9 @@
 <h2>Videos</h2>
 
+<p><%= link "New Video", to: video_path(@conn, :new) %></p>
 <ul>
 <%= for video <- @videos do %>
-  <li><%= video.title %> duration: <%= display_duration video.duration %></li>
+  <li><%= video.title %> duration: <%= display_duration video.duration %> 
+    <%= link "delete", to: video_path(@conn, :delete, video.id), method: :delete, data: [confirm: "Are you sure?"] %>
+  </li>
 <% end %>

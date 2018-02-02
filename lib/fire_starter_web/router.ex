@@ -18,6 +18,9 @@ defmodule FireStarterWeb.Router do
 
     get "/", PageController, :index
     get "/videos", VideoController, :index
+    get "/videos/new", VideoController, :new
+    post "/videos/post", VideoController, :create
+    delete "/videos/:id", VideoController, :delete
   end
 
   # Other scopes may use custom stacks.
