@@ -2,5 +2,5 @@
 
 <ul>
 <%= for video <- @videos do %>
-  <li><%= video.title %> duration: <%= video.duration %></li>
+  <li><%= video.title %> duration: <%= display_duration video.duration %></li>
 <% end %>
