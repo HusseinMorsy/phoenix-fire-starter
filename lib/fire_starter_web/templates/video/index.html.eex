@@ -1,0 +1,6 @@
+<h2>Videos</h2>
+
+<ul>
+<%= for video <- @videos do %>
+  <li><%= video.title %> duration: <%= video.duration %></li>
+<% end %>
